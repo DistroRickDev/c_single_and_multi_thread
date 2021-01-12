@@ -21,8 +21,8 @@ int matrix[LINES][COLS] = {
 
 
 void *sum_matrix(void * pid){
- //   printf("Thread ID: %d\n", *(int *)pid);
-    printf("Thread ID: %ld\n", *(long int *)pid);
+    printf("Thread ID: %d\n", *(int *)pid);
+
     for(int i = 0; i< LINES; i++)
     {
         long int sum = 0;
@@ -32,7 +32,6 @@ void *sum_matrix(void * pid){
         }
         printf("LINE %d sum: %ld\n", i, sum);
     }
-    
     long int sum = 0;
     for(int i = 0; i< LINES; i++)
     {
