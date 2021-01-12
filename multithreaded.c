@@ -25,7 +25,7 @@ void *sum_matrix(void * pid);
 int main(int argc, char* argv[]){
     clock_t begin = clock();
     pthread_t tids[LINES];
- 
+    
     for (int i = 0; i < LINES; i++)
     {
         pthread_attr_t p_atr;
@@ -49,7 +49,7 @@ void *sum_lines(void * line){
             sum+=matrix[*(int *)line][j];
         printf("LINE %d sum: %ld\n", *(int *)line, sum);
     }
-    pthread_exit(0);
+    pthread_exit(line);
 }
 
 

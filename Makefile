@@ -1,5 +1,5 @@
 TARGET_1 = singlethreaded
-
+TARGET_2 = multithreaded
 CROSSTOOL =
 
 CC_CPP = $(CROSSTOOL)g++
@@ -9,10 +9,14 @@ C_LIB = -lpthread
 
 CFLAGS = -Wall -g -std=c99
 
-all: clean $(TARGET_1)
+single: 
+		$(CC_C) $(CFLAGS) $(TARGET_1).c $(C_LIB) -o $(TARGET_1)
 
-$(TARGET_1): 
-	$(CC_C) $(CFLAGS) $@.c $(C_LIB) -o $@
+multi:  
+		$(CC_C) $(CFLAGS) $(TARGET_2).c $(C_LIB) -o $(TARGET_2)
+
+
+all: clean single multi 
 
 clean:
-	rm -f $(TARGET_1)
+	rm -f $(TARGET_1) $(TARGET_2)
