@@ -6,6 +6,8 @@
 #define LINES 10
 #define COLS 5
 
+static volatile int mSum = 0;
+
 int matrix[LINES][COLS] = {
     /*L1*/ {0,2,4,6,8},
     /*L2*/ {49,47,45,43,41},
@@ -19,49 +21,32 @@ int matrix[LINES][COLS] = {
     /*L10*/{40,42,44,46,48}
 };
 
-void *sum_lines(void * line);
-void *sum_matrix(void * pid);
+void *matrix_sums(void * line);
 
 int main(int argc, char* argv[]){
     clock_t begin = clock();
     pthread_t tids[LINES];
     
-    for (int i = 0; i < LINES; i++)
+    for (int i = 0; i <= LINES; i++)
     {
-        pthread_attr_t p_atr;
-        pthread_attr_init(&p_atr);
-        pthread_create(&tids[i], &p_atr, sum_lines, &i);
-    }
-    
-    for (int i = 0; i < LINES; i++)
-    {
+        //pthread_attr_t p_atr;
+        //pthread_attr_init(&p_atr);
+        pthread_create(&tids[i], NULL, matrix_sums, &i);
         pthread_join(tids[i], NULL);
     }
-
+    
     printf("Time elapsed:%fs \n",(double)(clock() - begin)/ CLOCKS_PER_SEC);
     return 0;
 }
 
-void *sum_lines(void * line){
-    //printf("Thread ID: %d\n", *(int *)line);
-        long int sum = 0;
-        for(int j=0; j< COLS; j++){
-            sum+=matrix[*(int *)line][j];
-        printf("LINE %d sum: %ld\n", *(int *)line, sum);
+void *matrix_sums(void * line){
+    long int sum = 0;
+    for(int j=0; j< COLS; j++){
+        sum+=matrix[*(int *)line][j];
+        printf("LINE %d COL:[%d] sum: %ld\n", *(int *)line, j ,sum);
     }
+    mSum += sum;    
     pthread_exit(line);
 }
 
 
-void *sum_matrix(void * pid){
-    printf("Thread ID: %d\n", *(int *)pid);
-    long int sum = 0;
-    for(int i = 0; i< LINES; i++)
-    {
-        for(int j=0; j< COLS; j++){
-            sum+=matrix[i][j];
-        }
-    }
-    printf("Matrix sum: %ld\n", sum);
-    pthread_exit(0);
-}
