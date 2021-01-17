@@ -30,12 +30,9 @@ int main(int argc, char* argv[]){
 
      for (int i = 0; i < LINES; i++)
     {
-        //pthread_attr_t p_atr;
-        //pthread_attr_init(&p_atr);
         pthread_create(&tids[i], NULL, matrix_build, &i);
         pthread_join(tids[i], NULL);
     }
-
     printf("Time elapsed:%fs \n",(double)(clock() - begin)/ CLOCKS_PER_SEC);
     return 0;
 }
