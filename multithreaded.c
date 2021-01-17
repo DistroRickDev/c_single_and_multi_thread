@@ -1,3 +1,9 @@
+/*
+    ALUNOS: RICARDO DUARTE
+            VENTURA TAMBA
+    CURSO: LICENCIATURA EM ENGENHARIA ELETROTECNICA E COMPUTADORES 2 ANO
+    UC: ARQUITETURA DE SISTEMAS COMPUTACIONAIS
+*/
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
@@ -29,7 +35,7 @@ int main(int argc, char* argv[]){
 
     printf("This system has %d processors configured and "
         "%d processors available.\n",
-        get_nprocs_conf(), get_nprocs());
+    get_nprocs_conf(), get_nprocs());
 
     clock_t begin = clock();
     pthread_t tids[LINES];

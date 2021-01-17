@@ -1,3 +1,9 @@
+/*
+    ALUNOS: RICARDO DUARTE
+            VENTURA TAMBA
+    CURSO: LICENCIATURA EM ENGENHARIA ELETROTECNICA E COMPUTADORES 2 ANO
+    UC: ARQUITETURA DE SISTEMAS COMPUTACIONAIS
+*/
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
@@ -20,8 +26,8 @@ int matrix[LINES][COLS] = {
 };
 
 
-void *sum_matrix(void * pid){
-    printf("Thread ID: %d\n", *(int *)pid);
+void *sum_matrix(void * tid){
+    printf("Thread ID: %d\n", *(int *)tid);
 
     for(int i = 0; i< LINES; i++)
     {
