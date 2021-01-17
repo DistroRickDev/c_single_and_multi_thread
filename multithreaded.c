@@ -20,7 +20,7 @@ int matrix[LINES][COLS] = {
     /*L7*/ {30,32,34,36,38},
     /*L8*/ {40,42,44,46,48},
     /*L9*/ {19,17,15,13,11},
-    /*L10*/{40,42,44,46,48}
+    /*L10*/{50,52,54,56,58}
 };
 
 void *matrix_sums(void * line);
@@ -34,13 +34,14 @@ int main(int argc, char* argv[]){
     clock_t begin = clock();
     pthread_t tids[LINES];
 
-    for (int i = 0; i <= LINES; i++)
+    for (int i = 0; i < LINES; i++)
     {
         //pthread_attr_t p_atr;
         //pthread_attr_init(&p_atr);
         pthread_create(&tids[i], NULL, matrix_sums, &i);
         pthread_join(tids[i], NULL);
         printf("LINE %d sum is: %d\n", i , line_sum);
+        mSum += line_sum;    
     }
     printf("Matrix sum is: %d\n", mSum);
     printf("Time elapsed:%fs \n",(double)(clock() - begin)/ CLOCKS_PER_SEC);
@@ -50,10 +51,10 @@ int main(int argc, char* argv[]){
 void *matrix_sums(void * line){
     line_sum = 0;
     int iLine = *(int *)line;
+    
     for(int j=0; j< COLS; j++){
         line_sum+=matrix[iLine][j];
-    }
-    mSum += line_sum;    
+    }  
     pthread_exit(line);
 }
 
