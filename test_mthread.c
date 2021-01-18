@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define LINES 5
-#define COLS 600000
+#define LINES 48
+#define COLS 60000
 int mega_array[LINES][COLS];
 
 void *matrix_build(void * line){
@@ -19,7 +19,7 @@ void *matrix_build(void * line){
     for (int i = 0; i < COLS; i++)
     {
         srand(time(NULL));
-        mega_array[iLine][i] = rand()%100;
+        mega_array[iLine][i] = i;
     }
     pthread_exit(line);
 }

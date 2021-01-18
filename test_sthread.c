@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define LINES 5
-#define COLS 600000
+#define LINES 48
+#define COLS 60000
 int mega_array[LINES][COLS];
 
 void *sum_matrix(void * pid){
@@ -20,7 +20,7 @@ void *sum_matrix(void * pid){
         for (int i = 0; i < COLS; i++)
         {
             srand(time(NULL));
-            mega_array[j][i] = rand()%100;
+            mega_array[j][i] = i;
         }
     }
     pthread_exit(0);
